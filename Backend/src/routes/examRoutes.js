@@ -37,7 +37,7 @@ router.get("/start", auth, async (req, res) => {
 // Submit Exam - calculate score
 router.post("/submit", auth, async (req, res) => {
   try {
-    const { answers } = req.body; // array of {questionId, selectedOption}
+    const { answers } = req.body;
     let score = 0;
 
     for (const ans of answers) {
@@ -45,14 +45,35 @@ router.post("/submit", auth, async (req, res) => {
       if (q && q.correctAnswer === ans.selectedOption) score++;
     }
 
-    // Save result
-    const result = new Result({ user: req.userId, score, total: answers.length });
+    const result = new Result({
+      user: req.userId,
+      score,
+      total: answers.length
+    });
     await result.save();
 
-    res.json({ score, total: answers.length });
+    res.json({
+      message: "Exam submitted successfully",
+      result: {
+        id: result._id,
+        score: result.score,
+        total: result.total,
+        date: result.date
+      }
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
+router.get("/results", auth, async (req, res) => {
+  try {
+    const results = await Result.find({ user: req.userId }).sort({ date: -1 });
+    res.json({ results }); // return array of past results
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 export default router;

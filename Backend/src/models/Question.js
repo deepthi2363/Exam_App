@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const questionSchema = new mongoose.Schema({
   question: { type: String, required: true },
-  options: [String],
-  answer: { type: Number, required: true } // index of correct option
+  options: [{ type: String, required: true }],
+  correctAnswer: { type: String, required: true } // keep as correctAnswer
 });
 
 export default mongoose.model("Question", questionSchema);
