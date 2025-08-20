@@ -1,20 +1,32 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./components/Auth/Login";
-import Register from "./components/Auth/Register";
+// src/App.js
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { useContext } from "react";
+import Navbar from "./components/Navbar/Navbar";
+import AuthSlider from "./components/Auth/AuthSlider";
 import StartExam from "./components/Exam/StartExam";
 import ResultPage from "./components/Result/ResultPage";
-import Navbar from "./components/Navbar/Navbar";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
+  const { user } = useContext(AuthContext);
+
   return (
     <Router>
+      {/* Navbar will show dynamic links based on login status */}
       <Navbar />
+
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/exam" element={<StartExam />} />
-        <Route path="/result" element={<ResultPage />} />
+        {/* Landing page: Login/Register slider */}
+        <Route path="/" element={user ? <Navigate to="/exam" /> : <AuthSlider />} />
+
+        {/* Exam page: only accessible if logged in */}
+        <Route path="/exam" element={user ? <StartExam /> : <Navigate to="/" />} />
+
+        {/* Result page: only accessible if logged in */}
+        <Route path="/result" element={user ? <ResultPage /> : <Navigate to="/" />} />
+
+        {/* Fallback for unknown routes */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );

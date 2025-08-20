@@ -1,0 +1,79 @@
+.auth-slider-container {
+  width: 360px;
+  margin: 80px auto;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.tab-buttons {
+  display: flex;
+}
+
+.tab-buttons button {
+  flex: 1;
+  padding: 12px 0;
+  border: none;
+  background-color: #0077b6;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.tab-buttons button.active {
+  background-color: #023e8a;
+}
+
+.slider-wrapper {
+  position: relative;
+  height: 400px; /* adjust based on form size */
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  width: 200%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  width: 50%;
+  padding: 20px;
+}
+
+.show-login {
+  transform: translateX(0%);
+}
+
+.show-register {
+  transform: translateX(-50%);
+}
+
+.slide form {
+  display: flex;
+  flex-direction: column;
+}
+
+.slide form input {
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.slide form button {
+  padding: 10px;
+  background-color: #0077b6;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.slide form button:hover {
+  background-color: #023e8a;
+}

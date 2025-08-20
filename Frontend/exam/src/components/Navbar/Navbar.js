@@ -1,16 +1,37 @@
-import React from "react";
-import { Link } from "react-router-dom";
-//import "./Navbar.css"; // optional, for styling
+// src/components/Navbar/Navbar.js
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import "./Navbar.css"; // optional basic styling
 
-function Navbar() {
+export default function Navbar() {
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/"); // redirect to login page after logout
+  };
+
   return (
-    <nav style={{ padding: "10px", backgroundColor: "#273c75", color: "white" }}>
-      <Link to="/" style={{ margin: "0 10px", color: "white" }}>Login</Link>
-      <Link to="/register" style={{ margin: "0 10px", color: "white" }}>Register</Link>
-      <Link to="/exam" style={{ margin: "0 10px", color: "white" }}>Exam</Link>
-      <Link to="/result" style={{ margin: "0 10px", color: "white" }}>Result</Link>
+    <nav className="navbar">
+      <h1 className="navbar-logo">Exam App</h1>
+      <div className="navbar-links">
+        {user ? (
+          <>
+            <Link to="/exam">Exam</Link>
+            <Link to="/result">Result</Link>
+            <button onClick={handleLogout} className="logout-btn">
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/">Login</Link>
+            <Link to="/register">Register</Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 }
-
-export default Navbar;
