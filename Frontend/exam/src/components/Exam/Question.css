@@ -1,0 +1,58 @@
+/* Center the entire question */
+.question-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 600px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+/* Question text */
+.question-text {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Options list */
+.options-list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+/* Option item */
+.option-item {
+  margin-bottom: 10px;
+}
+
+/* Label styling */
+.option-label {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  width: 100%;
+  cursor: pointer;
+  border: 1px solid #00796b;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+/* Hover effect */
+.option-label:hover {
+  background-color: #e0f2f1;
+}
+
+/* Selected option */
+.option-label.selected {
+  background-color: #00796b;
+  color: #fff;
+  font-weight: 600;
+}

@@ -6,6 +6,7 @@ import Question from "./Question";
 import Timer from "./Timer";
 import { useNavigate } from "react-router-dom";
 
+
 export default function StartExam() {
   const { token } = useContext(AuthContext);
   const [questions, setQuestions] = useState([]);
