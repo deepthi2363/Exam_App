@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+/*import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { fetchResults } from "../../api/api";
@@ -66,3 +66,24 @@ export default function Home() {
     </div>
   );
 }
+*/
+
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+const Home = () => {
+  const navigate = useNavigate();
+
+  const startExam = () => {
+    navigate("/exam");
+  };
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>Welcome to the Exam Portal</h1>
+      <button onClick={startExam}>Start Exam</button>
+    </div>
+  );
+};
+
+export default Home;
