@@ -188,8 +188,8 @@ You can test APIs using Postman:
 
 ## ✅ Live Demo
 
- Frontend (Vercel) → \[[Your Vercel Link]](https://exam-app-liard.vercel.app/)
- Backend (Render) → \[[Your Render API Link]](https://exam-app-km2k.onrender.com)
+ Frontend (Vercel) → (https://exam-app-liard.vercel.app/)
+ Backend (Render) → (https://exam-app-km2k.onrender.com)
 
 ---
 
