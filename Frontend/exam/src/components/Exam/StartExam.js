@@ -1,3 +1,4 @@
+// src/components/Exam/StartExam.js
 import { useEffect, useState, useContext } from "react";
 import { fetchQuestions, submitExam } from "../../api/api";
 import { AuthContext } from "../../context/AuthContext";
@@ -13,11 +14,14 @@ export default function StartExam() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!token) return; // Prevent fetch if not logged in
+
     const getQuestions = async () => {
       try {
         const res = await fetchQuestions(token);
         setQuestions(res.data);
       } catch (err) {
+        console.error(err);
         alert("Failed to fetch questions");
       }
     };
@@ -25,10 +29,12 @@ export default function StartExam() {
   }, [token]);
 
   const handleAnswer = (questionId, selectedOption) => {
-    setAnswers(prev => {
-      const existing = prev.find(a => a.questionId === questionId);
+    setAnswers((prev) => {
+      const existing = prev.find((a) => a.questionId === questionId);
       if (existing) {
-        return prev.map(a => a.questionId === questionId ? { questionId, selectedOption } : a);
+        return prev.map((a) =>
+          a.questionId === questionId ? { questionId, selectedOption } : a
+        );
       } else {
         return [...prev, { questionId, selectedOption }];
       }
@@ -38,16 +44,15 @@ export default function StartExam() {
   const handleNext = () => {
     if (currentIndex < questions.length - 1) setCurrentIndex(currentIndex + 1);
   };
-
   const handlePrevious = () => {
     if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
   };
-
   const handleSubmit = async () => {
     try {
       const res = await submitExam(answers, token);
       navigate("/results", { state: res.data });
     } catch (err) {
+      console.error(err);
       alert("Failed to submit exam");
     }
   };
@@ -60,11 +65,22 @@ export default function StartExam() {
       <Question
         question={questions[currentIndex]}
         onAnswer={handleAnswer}
-        selected={answers.find(a => a.questionId === questions[currentIndex]._id)?.selectedOption}
+        selected={answers.find(
+          (a) => a.questionId === questions[currentIndex]._id
+        )?.selectedOption}
       />
-      <button onClick={handlePrevious} disabled={currentIndex === 0}>Previous</button>
-      <button onClick={handleNext} disabled={currentIndex === questions.length - 1}>Next</button>
-      {currentIndex === questions.length - 1 && <button onClick={handleSubmit}>Submit Exam</button>}
+      <button onClick={handlePrevious} disabled={currentIndex === 0}>
+        Previous
+      </button>
+      <button
+        onClick={handleNext}
+        disabled={currentIndex === questions.length - 1}
+      >
+        Next
+      </button>
+      {currentIndex === questions.length - 1 && (
+        <button onClick={handleSubmit}>Submit Exam</button>
+      )}
     </div>
   );
 }

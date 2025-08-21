@@ -1,9 +1,10 @@
 import express from "express";
 import Question from "../models/Question.js";
+import { authMiddleware } from "../middleware/authMiddleware.js"; // named import
 
 const router = express.Router();
 
-// Add question (for testing only)
+// Add question (for testing only, public)
 router.post("/add", async (req, res) => {
   try {
     const question = new Question(req.body);
@@ -14,11 +15,11 @@ router.post("/add", async (req, res) => {
   }
 });
 
-// Get all questions
-router.get("/", async (req, res) => {
+// Get all questions (protected route)
+router.get("/", authMiddleware, async (req, res) => {
   try {
     const questions = await Question.find();
-    res.json(questions);
+    res.json(questions); // return array of questions
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

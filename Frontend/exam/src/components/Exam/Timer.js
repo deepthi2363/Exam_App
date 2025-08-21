@@ -8,17 +8,18 @@ export default function Timer({ duration, onTimeUp }) {
       onTimeUp();
       return;
     }
-    const timer = setInterval(() => {
-      setTimeLeft(prev => prev - 1);
-    }, 1000);
+    const timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
     return () => clearInterval(timer);
   }, [timeLeft, onTimeUp]);
 
-  const formatTime = (seconds) => {
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
-  };
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
 
-  return <div>Time Left: {formatTime(timeLeft)}</div>;
+  return (
+    <div>
+      <h2>
+        Time Left: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+      </h2>
+    </div>
+  );
 }

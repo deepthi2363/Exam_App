@@ -1,15 +1,31 @@
+// src/components/Auth/Login.js
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { loginUser } from "../../api/api";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Call login function (you can replace with API call later)
-    login({ email });
+    try {
+      const res = await loginUser({ email, password });
+
+      // Store user + token in context
+      login({ user: res.data.user, token: res.data.token });
+
+      // Navigate to exam page
+      navigate("/start-exam");
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || "Login failed. Please check your credentials.");
+    }
   };
 
   return (

@@ -1,4 +1,6 @@
-export default function Question({ question, onAnswer, selected }) {
+import React from "react";
+
+export default function Question({ question, selected, onAnswer }) {
   const handleSelect = (option) => {
     onAnswer(question._id, option);
   };
@@ -7,7 +9,7 @@ export default function Question({ question, onAnswer, selected }) {
     <div>
       <h3>{question.question}</h3>
       <ul>
-        {question.options.map(opt => (
+        {question.options.map((opt) => (
           <li key={opt}>
             <label>
               <input
