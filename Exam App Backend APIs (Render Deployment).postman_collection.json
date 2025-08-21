@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "f7833bfe-a0fc-4076-812d-dfea56861e5b",
+		"name": "Exam App Backend APIs (Render Deployment)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26870803"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Deepthi Reddy\",\n  \"email\": \"deepthi@example.com\",\n  \"password\": \"password123\"\n}"
+				},
+				"url": {
+					"raw": "https://exam-app-km2k.onrender.com/api/auth/register",
+					"protocol": "https",
+					"host": [
+						"exam-app-km2k",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"deepthi@example.com\",\n  \"password\": \"password123\"\n}"
+				},
+				"url": {
+					"raw": "https://exam-app-km2k.onrender.com/api/auth/login",
+					"protocol": "https",
+					"host": [
+						"exam-app-km2k",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Exam",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer <your-token>"
+					}
+				],
+				"url": {
+					"raw": "https://exam-app-km2k.onrender.com/api/exam/start",
+					"protocol": "https",
+					"host": [
+						"exam-app-km2k",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"exam",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit Exam",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer <your-token>"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"answers\": [\n    {\n      \"questionId\": \"<question-id-1>\",\n      \"selectedOption\": \"Library\"\n    },\n    {\n      \"questionId\": \"<question-id-2>\",\n      \"selectedOption\": \"Python\"\n    }\n  ]\n}"
+				},
+				"url": {
+					"raw": "https://exam-app-km2k.onrender.com/api/exam/submit",
+					"protocol": "https",
+					"host": [
+						"exam-app-km2k",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"exam",
+						"submit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer <your-token>"
+					}
+				],
+				"url": {
+					"raw": "https://exam-app-km2k.onrender.com/api/exam/results",
+					"protocol": "https",
+					"host": [
+						"exam-app-km2k",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"exam",
+						"results"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
