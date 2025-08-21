@@ -35,7 +35,7 @@ const correctAnswerMap = [0, 0, 1, 0, 0]; // index of correct answer in each opt
 // Generate 70 unique questions
 const generateQuestions = () => {
   const questions = [];
-  for (let i = 0; i < 70; i++) {
+  for (let i = 0; i < 25; i++) {
     const topic = topics[i % topics.length];
     const template = questionTemplates[i % questionTemplates.length];
     const options = optionsPool[i % optionsPool.length];
@@ -54,7 +54,7 @@ const seed = async () => {
     await Question.deleteMany(); // clear existing questions
     const questions = generateQuestions();
     await Question.insertMany(questions);
-    console.log("✅ 70 unique questions seeded successfully!");
+    console.log("✅ 25 unique questions seeded successfully!");
     mongoose.disconnect();
   } catch (err) {
     console.error(err);

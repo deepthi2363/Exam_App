@@ -1,87 +1,46 @@
-/*import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import { fetchResults } from "../../api/api";
-import "../../styles/App.css";
-
-export default function Home() {
-  const { user, token } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!token) return;
-
-    const getResults = async () => {
-      try {
-        const res = await fetchResults(token);
-        setResults(res.data); // assume API returns array of previous results
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getResults();
-  }, [token]);
-
-  const handleStartExam = () => {
-    navigate("/exam/start");
-  };
-
-  return (
-    <div className="home-container">
-      <h2>Welcome, {user?.username || user?.email}</h2>
-      <button className="start-exam-btn" onClick={handleStartExam}>
-        Start Exam
-      </button>
-
-      <h3>Your Previous Results</h3>
-      {loading ? (
-        <p>Loading results...</p>
-      ) : results.length === 0 ? (
-        <p>No results found.</p>
-      ) : (
-        <table className="results-table">
-          <thead>
-            <tr>
-              <th>Exam Date</th>
-              <th>Score</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {results.map((r, index) => (
-              <tr key={index}>
-                <td>{new Date(r.date).toLocaleString()}</td>
-                <td>{r.score}</td>
-                <td>{r.total}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
-  );
-}
-*/
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Home = () => {
   const navigate = useNavigate();
+
+  const API_BASE = process.env.REACT_APP_API_BASE_URL; // dynamically read URL
 
   const startExam = () => {
     navigate("/exam");
   };
 
+  const viewResult = async () => {
+    try {
+      const token = localStorage.getItem("token"); // JWT token
+      const response = await axios.get(`${API_BASE}/api/exam/results`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      const results = response.data;
+
+      if (!results || results.length === 0) {
+        alert("No previous results found.");
+        return;
+      }
+
+      const lastResult = results[results.length - 1];
+
+      navigate("/result", { state: { score: lastResult.score, total: lastResult.total } });
+    } catch (error) {
+      console.error("Failed to fetch results:", error);
+      alert("Failed to fetch results. Please try again.");
+    }
+  };
+
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Welcome to the Exam Portal</h1>
-      <button onClick={startExam}>Start Exam</button>
+      <button onClick={startExam} style={{ marginRight: "10px" }}>
+        Start Exam
+      </button>
+      <button onClick={viewResult}>View Previous Result</button>
     </div>
   );
 };

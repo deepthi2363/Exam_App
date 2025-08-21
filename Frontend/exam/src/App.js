@@ -28,7 +28,7 @@ function App() {
         <Route path="/exam" element={user ? <StartExam /> : <Navigate to="/" />} />
 
         {/* Result page: only accessible if logged in */}
-        <Route path="/result" element={user ? <ResultPage /> : <Navigate to="/" />} />
+        <Route path="/results" element={user ? <ResultPage /> : <Navigate to="/" />} />
 
         {/* Fallback for unknown routes */}
         <Route path="*" element={<Navigate to="/" />} />

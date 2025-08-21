@@ -28,6 +28,6 @@ export const submitExam = (answers, token) =>
 
 // Fetch past results (optional)
 export const fetchResults = (token) =>
-  axios.get(`${API_URL}/results`, {
+  axios.get(`${API_URL}/exam/results`, {
     headers: { Authorization: `Bearer ${token}` },
   });

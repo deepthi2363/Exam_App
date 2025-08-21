@@ -24,6 +24,8 @@ function Login() {
 
       // Save user + token in context
       login({ user: res.data.user, token: res.data.token });
+      localStorage.setItem("token", res.data.token);
+
 
       // Show success message
       setSuccessMsg("Successfully logged in!");
@@ -31,7 +33,7 @@ function Login() {
       // Wait 1 second before navigating
       setTimeout(() => {
         navigate("/exam/start");
-      }, 1000);
+      }, 2000);
     } catch (err) {
       setErrorMsg(err.response?.data?.message || "Login failed. Check credentials.");
     } finally {

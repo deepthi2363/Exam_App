@@ -2,7 +2,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import "./Navbar.css"; // optional basic styling
+import "./Navbar.css";
 
 export default function Navbar() {
   const { user, logout } = useContext(AuthContext);
@@ -19,8 +19,10 @@ export default function Navbar() {
       <div className="navbar-links">
         {user ? (
           <>
+            {/* 👇 Home link visible only after login */}
+            <Link to="/home">Home</Link>  
             <Link to="/exam">Exam</Link>
-            <Link to="/result">Result</Link>
+            <Link to="/results">Results</Link>
             <button onClick={handleLogout} className="logout-btn">
               Logout
             </button>
