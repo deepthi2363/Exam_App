@@ -5,7 +5,9 @@ An online exam portal where users can register, log in, take exams, and view res
 Deployed with:
 
  Frontend → [Vercel](https://vercel.com/)
+ 
  Backend → [Render](https://render.com/)
+ 
  Database → MongoDB Atlas
 
 ---
@@ -178,19 +180,16 @@ EXAM_APP/
 
 You can test APIs using Postman:
 
-1. Import the provided `exam-app.postman_collection.json` file
-2. Update base URL (`http://localhost:10000` or Render URL)
+1. Import the provided `Exam App Backend APIs (Render Deployment).postman_collection.json` file
+2. Update base URL (`http://localhost:5000` or Render URL)
 3. Test endpoints easily
 
 ---
 
 ## ✅ Live Demo
 
- Frontend (Vercel) → \[Your Vercel Link]
- Backend (Render) → \[Your Render API Link]
+ Frontend (Vercel) → \[[Your Vercel Link]](https://exam-app-liard.vercel.app/)
+ Backend (Render) → \[[Your Render API Link]](https://exam-app-km2k.onrender.com)
 
 ---
 
-✨ Now your README clearly explains setup, deployment, and APIs.
-
-Do you want me to also create a Postman collection JSON file for your project so you can attach it?
